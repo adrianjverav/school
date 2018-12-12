@@ -27,4 +27,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // Relaciones
+    
+    // Un usuario [teacher] dicta varios cursos
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 }
