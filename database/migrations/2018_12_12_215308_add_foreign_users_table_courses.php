@@ -14,7 +14,7 @@ class AddForeignUsersTableCourses extends Migration
     public function up()
     {
         Schema::table('courses', function (Blueprint $table) {
-            $table->integer('teacher_id')->unsigned();
+            $table->integer('teacher_id')->unsigned()->nullable();
             $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
