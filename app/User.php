@@ -33,7 +33,7 @@ class User extends Authenticatable
     // Un usuario [teacher] dicta varios cursos
     public function courses()
     {
-        return $this->hasMany(Course::class);
+        return $this->hasMany(Course::class, 'teacher_id');
     }
 
     // Un usuario [student] puede estar inscrito en uno o varios cursos
