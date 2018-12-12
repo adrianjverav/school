@@ -11,9 +11,15 @@ class Course extends Model
 
     // Relaciones
     
-    // Un curso es dictado por un [usuario] profesor
+    // Un curso es dictado por un [student] profesor
     public function teacher()
     {
     	return $this->belongsTo(User::class);
+    }
+
+    // Un curso tiene inscrito a muchos usuarios [student]
+    public function students()
+    {
+    	return $this->belongsToMany(User::class);
     }
 }
