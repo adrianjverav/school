@@ -35,4 +35,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Course::class);
     }
+
+    // Un usuario [student] puede estar inscrito en uno o varios cursos
+    public function inscriptions()
+    {
+        return $this->belongsToMany(Course::class)->withPivot('qualification');
+    }
 }
