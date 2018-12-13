@@ -1,5 +1,7 @@
 @extends('auth.layout')
 
+@section('title', 'Inicio de sesión')
+
 @section('content')
 
     <div class="unix-login">
