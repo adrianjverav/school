@@ -14,7 +14,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::getCourses(auth()->user());
+        return $courses;
     }
 
     /**
