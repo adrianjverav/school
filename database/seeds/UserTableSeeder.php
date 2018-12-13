@@ -28,8 +28,18 @@ class UserTableSeeder extends Seeder
         		'surname' => $surname = $faker->lastName,
         		'email' => strtolower($name . '_' . $surname . '@school.test'),
         		'password' => bcrypt('secret'),
-        		'role' => $faker->randomElement($array = array('student', 'teacher')),
+        		'role' => 'student',
         	]);
+        }
+
+        for ($i=0; $i < 10; $i++) { 
+            DB::table('users')->insert([
+                'name' => $name = $faker->firstName,
+                'surname' => $surname = $faker->lastName,
+                'email' => strtolower($name . '_' . $surname . '@school.test'),
+                'password' => bcrypt('secret'),
+                'role' => 'teacher',
+            ]);
         }
     }
 }
