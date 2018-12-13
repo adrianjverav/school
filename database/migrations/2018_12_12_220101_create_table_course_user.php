@@ -17,7 +17,7 @@ class CreateTableCourseUser extends Migration
             $table->increments('id');
             $table->integer('course_id')->unsigned();
             $table->integer('student_id')->unsigned();
-            $table->double('qualification');
+            $table->double('qualification')->nullable();
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
