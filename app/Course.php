@@ -9,6 +9,19 @@ class Course extends Model
     protected $table = 'courses';
     protected $fillable = ['name'];
 
+    // Métodos
+    
+    public static function getCourses($user)
+    {
+        if ($user->role == 'admin') {
+            return Course::all();
+        } else if ($user->role == 'student') {
+            return $user->inscriptions;
+        } else {
+            return $user->courses;
+        }
+    }
+
     // Relaciones
     
     // Un curso es dictado por un [student] profesor
