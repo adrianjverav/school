@@ -25,7 +25,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.courses.create');
     }
 
     /**
@@ -36,7 +36,10 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $course = new Course;
+        $course->name = $request->name;
+        $course->save();
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -47,7 +50,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
+        return view('admin.courses.show', ['course' => $course]);
     }
 
     /**
@@ -58,7 +61,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+        return view('admin.courses.edit', ['course' => $course]);
     }
 
     /**
@@ -70,7 +73,9 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        $course->name = $request->name;
+        $course->save();
+        return redirect()->route('courses.index');
     }
 
     /**
