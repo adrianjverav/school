@@ -6,7 +6,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ env('APP_NAME') }}</title>
+    <title>{{ env('APP_NAME') }} - @yield('title')</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -16,11 +16,10 @@
         <div class="header">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
-                        <b><img src="images/logo.png" alt="homepage" class="dark-logo" /></b>
-                        <span>
-                            <img src="images/logo-text.png" alt="homepage" class="dark-logo" />
-                        </span>
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        <b>
+                            <img src="{{ asset('/images/logo.png') }}" alt="homepage" class="dark-logo"/>
+                        </b>
                     </a>
                 </div>
 
@@ -36,17 +35,11 @@
         <div class="page-wrapper">
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Escritorio</h3> </div>
-                <div class="col-md-7 align-self-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="javascript:void">Inicio</a>
-                        </li>
-                        <li class="breadcrumb-item active">
-                            Escritorio
-                        </li>
-                    </ol>
+                    <h3 class="text-primary">
+                        @yield('options')
+                    </h3>
                 </div>
+                @yield('breadcrumbs')
             </div>
 
             <div class="container-fluid">

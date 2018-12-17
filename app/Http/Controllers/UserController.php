@@ -19,13 +19,35 @@ class UserController extends Controller
     }
 
     /**
+     * Display all teachers users
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function teachers()
+    {
+        $teachers = User::where('role', 'teacher')->get();
+        return view('admin.users.teachers', ['teachers' => $teachers]);
+    }
+
+    /**
+     * Display all teachers users
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function students()
+    {
+        $students = User::where('role', 'student')->get();
+        return view('admin.users.students', ['students' => $students]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.users.create', ['role' => request()->role]);
     }
 
     /**
@@ -40,10 +62,12 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->surname = $request->surname;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        $user->password = bcrypt('secret');
         $user->role = $request->role;
         $user->save();
-        return redirect()->route('users.index');
+
+        $url = $user->role . 's';
+        return redirect()->route($url);
     }
 
     /**
@@ -54,7 +78,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.user.show', ['user' => $user]);
+        return view('admin.users.show', ['user' => $user]);
     }
 
     /**
@@ -81,19 +105,22 @@ class UserController extends Controller
         $user->surname = $request->surname;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->role = $request->role;
         $user->save();
-        return redirect()->route('users.index');
+
+        $url = $user->role . 's';
+        return redirect()->route($url);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Show the form for delete the specified resource.
      *
-     * @param  int  $id
+     * @param  App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        $url = $user->role . 's';
+        return redirect()->route($url);
     }
 }

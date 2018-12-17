@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Nuevo profesor')
+@section('title', 'Asignación de profesor')
 
 @section('options')
-	<a href="{{ route('teachers') }}">
+	<a href="{{ route('courses.index') }}">
 	    Volver al listado
 	    <i class="fa fa-list"></i>
 	</a>
@@ -16,10 +16,10 @@
                 <a href="{{ route('home') }}">Inicio</a>
             </li>
             <li class="breadcrumb-item ">
-                <a href="{{ route('teachers') }}">Profesores</a>
+                <a href="{{ route('courses.index') }}">Cursos</a>
             </li>
             <li class="breadcrumb-item active">
-                Nuevo profesor
+                Asignación de profesor
             </li>
         </ol>
     </div>
@@ -32,40 +32,35 @@
 				<div class="card-body">
 					<div class="form-validation">
 
-						<form action="{{ route('users.store', ['role' => $role]) }}" method="post">
+						<form action="{{ route('courses.save-teacher', [$course->id]) }}" method="post">
 							@csrf
+							@method('PUT')
 
 							<div class="form-group row">
 								<label class="col-lg-3 col-form-label">
-									Nombre
-									<span class="text-danger">*</span>
+									Curso
 								</label>
 								<div class="col-lg-9">
-									<input type="text" class="form-control" name="name" required>
+									<input type="text" class="form-control" value="{{ $course->name }}" disabled>
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-lg-3 col-form-label">
-									Apellido
-									<span class="text-danger">*</span>
-								</label>
-								<div class="col-lg-9">
-									<input type="text" class="form-control" name="surname" required>
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-lg-3 col-form-label">
-									Correo
-									<span class="text-danger">*</span>
-								</label>
-								<div class="col-lg-9">
-									<input type="text" class="form-control" name="email" required>
-								</div>
+							    <label class="col-lg-3 col-form-label">Profesor <span class="text-danger">*</span></label>
+							    <div class="col-lg-9">
+							        <select class="form-control" id="val-skill" name="teacher_id">
+							            <option value="" selected>Seleccione un profesor</option>
+							            @foreach ($teachers as $teacher)
+							            	<option value="{{ $teacher->id }}" {{ ($course->teacher_id == $teacher->id) ? 'selected' : '' }}>
+							            		{{ $teacher->name . ' ' . $teacher->surname }}
+							            	</option>
+							            @endforeach
+							        </select>
+							    </div>
 							</div>
 							<div class="form-group row">
 							    <div class="col-lg-8 ml-auto">
 							        <button type="submit" class="btn btn-primary">
-							        	Guardar
+							        	Asignar
 							        </button>
 							    </div>
 							</div>

@@ -16,7 +16,7 @@ class CourseUserTableSeeder extends Seeder
 
         for ($i=0; $i < 50; $i++) { 
         	DB::table('course_user')->insert([
-        		'course_id' => $faker->numberBetween($min = 1, $max = 18),
+        		'course_id' => $faker->numberBetween($min = 8, $max = 10),
         		'student_id' => $faker->numberBetween($min = 2, $max = 41),
         		'qualification' => $faker->numberBetween($min = 0, $max = 20),
         	]);
