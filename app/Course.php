@@ -22,6 +22,15 @@ class Course extends Model
         }
     }
 
+    public static function allowedTime()
+    {
+        $hour = date_create();
+        if ($hour >= date_create_from_format('H:i', '8:00') && date_create_from_format('H:i', '10:00')) {
+            return true;
+        }
+        return false;
+    }
+
     // Relaciones
     
     // Un curso es dictado por un [student] profesor
@@ -33,6 +42,6 @@ class Course extends Model
     // Un curso tiene inscrito a muchos usuarios [student]
     public function students()
     {
-    	return $this->belongsToMany(User::class);
+    	return $this->belongsToMany(User::class, 'course_user', 'course_id', 'student_id');
     }
 }
